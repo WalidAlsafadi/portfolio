@@ -25,7 +25,7 @@ export const education: Education[] = [
     degree: 'Bachelor of Science in Data Science and Artificial Intelligence',
     institution: 'University College of Applied Sciences',
     location: 'Gaza, Palestine',
-    period: 'Aug 2022 - Jul 2026',
+    period: 'Sep 2022 - Sep 2026',
     detail: 'Grade: 91.00%',
     logo: organizations.ucas.logo,
     logoAlt: organizations.ucas.logoAlt,

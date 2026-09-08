@@ -1,4 +1,4 @@
-# Walid Alsafadi — Portfolio
+# Walid Alsafadi | Portfolio
 
 Source code for [walidalsafadi.com](https://walidalsafadi.com), the personal portfolio of Walid Alsafadi.
 
