@@ -4,6 +4,8 @@ export type Experience = {
   role: string;
   organization: string;
   period: string;
+  location?: string;
+  workMode?: 'On-site' | 'Remote';
   summary: string;
   detail: string;
   bullets: string[];
@@ -17,6 +19,8 @@ export const experience: Experience[] = [
     role: 'Teaching Assistant',
     organization: 'University College of Applied Sciences',
     period: 'May 2026 - Present',
+    location: 'Gaza Strip, Palestine',
+    workMode: 'On-site',
     summary: 'Teach and support Data Science Programming Languages labs for more than 150 students across three classes.',
     detail: 'The labs cover Python, NumPy, pandas, SQL, API data access, and practical data workflows. The role includes preparing materials, coding exercises, assignments, and practical activities, as well as supporting assessment, student questions, and course follow-up.',
     bullets: [
@@ -33,6 +37,8 @@ export const experience: Experience[] = [
     role: 'Research Partnerships and Outreach Assistant',
     organization: 'Unit of International Academic Cooperation, University College of Applied Sciences',
     period: 'May 2026 - Present',
+    location: 'Gaza Strip, Palestine',
+    workMode: 'On-site',
     summary: 'Support international academic cooperation and research partnership activities.',
     detail: 'Work includes identifying relevant research calls and funding opportunities, mapping institutions and academic departments, and preparing structured outreach material for potential collaborations.',
     bullets: [
@@ -48,6 +54,8 @@ export const experience: Experience[] = [
     role: 'Data Analyst and Research Intern',
     organization: 'Enbat',
     period: 'Nov 2025 - May 2026',
+    location: 'West Bank, Palestine',
+    workMode: 'Remote',
     summary: 'Developed reproducible workflows for Arabic qualitative research data and manuscript preparation.',
     detail: 'The work covered transcription processing, quote extraction, meaning-unit segmentation, Arabic-English alignment, dataset preparation, and codebook-based thematic analysis support. A structured dataset of 319 meaning units was built using AI-assisted processing within an existing human-defined analytical framework.',
     bullets: [
@@ -65,6 +73,8 @@ export const experience: Experience[] = [
     role: 'Head of Public Relations',
     organization: 'UCAS Engineering Club',
     period: 'Dec 2025 - May 2026',
+    location: 'Gaza Strip, Palestine',
+    workMode: 'On-site',
     summary: 'Led public relations and communications for the UCAS Engineering Club, supporting outreach, activity promotion, and engagement.',
     detail: 'Led public relations and communications for the UCAS Engineering Club, coordinating outreach and promotional messaging for club activities while supporting engagement with students and relevant external audiences.',
     bullets: [

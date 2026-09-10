@@ -9,7 +9,7 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
         {items.map((item, index) => (
           <li className="flex items-center gap-2" key={item.label}>
             {index > 0 && <span aria-hidden="true">/</span>}
-            {item.href ? <Link className="hover:text-ink" href={item.href}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
+            {item.href ? <Link className="link-underline hover:text-ink" href={item.href}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
           </li>
         ))}
       </ol>

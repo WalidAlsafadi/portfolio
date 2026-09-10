@@ -4,6 +4,7 @@ export type Education = {
   degree: string;
   institution: string;
   location: string;
+  attendance?: 'On-site' | 'Remote';
   period: string;
   detail?: string;
   logo?: string;
@@ -15,7 +16,7 @@ export const education: Education[] = [
   {
     degree: 'Master of Science in Computer Engineering',
     institution: 'Islamic University of Gaza',
-    location: 'Gaza, Palestine',
+    location: 'Gaza Strip',
     period: 'Sep 2026 - Present',
     logo: organizations.iug.logo,
     logoAlt: organizations.iug.logoAlt,
@@ -24,7 +25,8 @@ export const education: Education[] = [
   {
     degree: 'Bachelor of Science in Data Science and Artificial Intelligence',
     institution: 'University College of Applied Sciences',
-    location: 'Gaza, Palestine',
+    location: 'Gaza Strip, Palestine',
+    attendance: 'On-site',
     period: 'Sep 2022 - Sep 2026',
     detail: 'Grade: 91.00%',
     logo: organizations.ucas.logo,
@@ -42,7 +44,7 @@ export const education: Education[] = [
   {
     degree: 'High School Diploma, Advanced Stream',
     institution: 'Al-Jawdah Boys’ School For Secondary Education',
-    location: 'Gaza, Palestine',
+    location: 'Ras Al Khaimah, United Arab Emirates',
     period: 'Sep 2018 - Jun 2021',
     detail: 'Grade: 91.67%',
     logo: organizations.uaeMinistryOfEducation.logo,

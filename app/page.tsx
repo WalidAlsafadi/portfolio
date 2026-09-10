@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { Container } from '@/components/layout/container';
 import { Contact } from '@/components/contact';
 import { ProjectList } from '@/components/projects/project-list';
@@ -8,6 +7,7 @@ import { PublicationEntry } from '@/components/publications/publication-entry';
 import { SocialLinks } from '@/components/social-links';
 import { ArrowLink } from '@/components/ui/arrow-link';
 import { JsonLd } from '@/components/ui/json-ld';
+import { SectionLink } from '@/components/ui/section-link';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { credentials } from '@/data/credentials';
 import { education } from '@/data/education';
@@ -30,8 +30,8 @@ export default function HomePage() {
               <h1 className="mt-8 font-serif text-hero font-normal">{profile.firstName}<br />{profile.lastName}</h1>
               <p className="mt-8 max-w-xl text-[17px] leading-8 text-graphite md:text-lg">{profile.shortBio}</p>
               <div className="mt-9 flex flex-wrap items-center gap-6">
-                <Link href="#selected-work" className="inline-flex bg-ink px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-graphite">View projects</Link>
-                <Link href="#contact" className="link-underline text-sm font-medium text-ink">Contact</Link>
+                <SectionLink sectionId="selected-work" className="inline-flex bg-ink px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-graphite">View projects</SectionLink>
+                <SectionLink sectionId="contact" className="link-underline text-sm font-medium text-ink">Contact</SectionLink>
               </div>
               <div className="mt-12 border-t border-line pt-6"><SocialLinks /></div>
             </div>
@@ -39,7 +39,6 @@ export default function HomePage() {
               <span className="absolute -left-3 -top-3 h-10 w-10 border-l border-t border-line" aria-hidden="true" />
               <span className="absolute -bottom-3 -right-3 h-10 w-10 border-b border-r border-line" aria-hidden="true" />
               <Image className="aspect-[4/5] w-full object-cover grayscale contrast-[1.04]" src={profile.image} alt="Walid Alsafadi" width={768} height={960} priority sizes="(min-width: 1024px) 384px, 100vw" />
-              <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.15em] text-ash">Fig. 01 · Portrait</p>
             </div>
           </div>
         </Container>
@@ -52,38 +51,36 @@ export default function HomePage() {
             <div className="lg:col-span-9">
               <h2 className="max-w-4xl font-serif text-3xl font-medium leading-tight md:text-4xl">Research rigor, engineering practice, and technical education.</h2>
               <p className="mt-6 max-w-3xl text-base leading-8 text-graphite">{profile.bio}</p>
+              <div className="mt-10 border-t border-line pt-7">
+                <p className="eyebrow">Areas of focus</p>
+                <ul className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {areasOfWork.map((area) => (
+                    <li className="bg-wash px-4 py-3 text-sm font-medium text-graphite" key={area}>{area}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-line py-20 md:py-28" id="selected-work">
+      <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="experience">
         <Container>
-          <SectionHeading number="01" title="Projects" />
-          <ProjectList items={projects.filter((project) => project.featured)} headingLevel="h3" variant="featured" />
-          <div className="mt-9 flex justify-end"><ArrowLink href="/projects">View all projects</ArrowLink></div>
-        </Container>
-      </section>
-
-      <section className="border-t border-line py-20 md:py-28" id="research-publication">
-        <Container>
-          <SectionHeading number="02" title="Research & Publication" />
-          <div className="border-b border-line"><PublicationEntry publication={publications[0]} headingLevel="h3" /></div>
-        </Container>
-      </section>
-
-      <section className="border-t border-line py-20 md:py-28" id="experience">
-        <Container>
-          <SectionHeading number="03" title="Experience" />
+          <SectionHeading number="01" title="Experience" />
           <div className="border-b border-line">
             {experience.filter((item) => item.showOnHomepage).map((item) => (
-              <article className="grid gap-4 border-t border-line py-7 md:grid-cols-12 md:gap-8" key={`${item.role}-${item.organization}`}>
+              <article className="grid gap-4 border-t border-line px-4 py-7 transition-colors hover:bg-wash/60 md:grid-cols-12 md:gap-8 md:px-6" key={`${item.role}-${item.organization}`}>
                 <p className="font-mono text-xs text-ash md:col-span-3">{item.period}</p>
                 <div className="flex items-start gap-5 md:col-span-9">
                   <OrganizationLogo src={item.logo} alt={item.logoAlt} />
                   <div>
                     <h3 className="font-serif text-xl font-medium">{item.role}</h3>
                     <p className="mt-1 text-sm font-medium text-graphite">{item.organization}</p>
+                    {item.location ? (
+                      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-ash">
+                        {[item.location, item.workMode].filter(Boolean).join(' · ')}
+                      </p>
+                    ) : null}
                     <p className="mt-3 max-w-2xl text-sm leading-6 text-graphite">{item.summary}</p>
                   </div>
                 </div>
@@ -94,18 +91,36 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="border-t border-line py-20 md:py-28" id="education">
+      <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="research-publication">
+        <Container>
+          <SectionHeading number="02" title="Research & Publication" />
+          <div className="border-b border-line"><PublicationEntry publication={publications[0]} headingLevel="h3" /></div>
+        </Container>
+      </section>
+
+      <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="selected-work">
+        <Container>
+          <SectionHeading number="03" title="Projects" />
+          <ProjectList items={projects.filter((project) => project.featured)} headingLevel="h3" variant="featured" />
+          <div className="mt-9 flex justify-end"><ArrowLink href="/projects">View all projects</ArrowLink></div>
+        </Container>
+      </section>
+
+      <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="education">
         <Container>
           <SectionHeading number="04" title="Education" />
           <div className="border-b border-line">
             {education.filter((item) => item.showOnHomepage).map((item) => (
-              <article className="grid gap-4 border-t border-line py-7 md:grid-cols-12 md:gap-8" key={item.degree}>
+              <article className="grid gap-4 border-t border-line px-4 py-7 transition-colors hover:bg-wash/60 md:grid-cols-12 md:gap-8 md:px-6" key={item.degree}>
                 <p className="font-mono text-xs text-ash md:col-span-3">{item.period}</p>
                 <div className="flex items-start gap-5 md:col-span-9">
                   {item.logo && item.logoAlt && <OrganizationLogo src={item.logo} alt={item.logoAlt} />}
                   <div>
                     <h3 className="font-serif text-xl font-medium">{item.degree}</h3>
                     <p className="mt-2 text-sm text-graphite">{item.institution}</p>
+                    <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-ash">
+                      {[item.location, item.attendance].filter(Boolean).join(' · ')}
+                    </p>
                     {item.detail && <p className="mt-3 font-mono text-xs text-ash">{item.detail}</p>}
                   </div>
                 </div>
@@ -131,15 +146,6 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-        </Container>
-      </section>
-
-      <section className="border-t border-line py-20 md:py-28">
-        <Container>
-          <SectionHeading number="06" title="Areas of Focus" />
-          <ul className="grid gap-x-10 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
-            {areasOfWork.map((area) => <li className="border-t border-line pt-4 font-serif text-xl md:text-2xl" key={area}>{area}</li>)}
-          </ul>
         </Container>
       </section>
 

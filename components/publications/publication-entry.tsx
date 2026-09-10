@@ -6,7 +6,7 @@ export function PublicationEntry({ publication, detailed = false, headingLevel =
   const Heading = headingLevel;
 
   return (
-    <article className="border-t border-line py-8 md:py-10">
+    <article className="border-t border-line px-4 py-8 transition-colors hover:bg-wash/60 md:px-6 md:py-10">
       <div className="grid gap-5 md:grid-cols-12 md:gap-8">
         <span className="font-mono text-xs text-ash md:col-span-1">{publication.year}</span>
         <div className="md:col-span-8">

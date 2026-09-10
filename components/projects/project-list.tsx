@@ -10,7 +10,7 @@ export function ProjectList({ items, headingLevel = 'h2', variant = 'archive' }:
       {items.map((project, position) => {
         if (variant === 'featured' && project.visual) {
           return (
-            <article className="group border-t border-line py-10 transition-colors hover:bg-wash/60 md:py-14" key={project.slug}>
+            <article className="group border-t border-line px-4 py-10 transition-colors hover:bg-wash/60 md:px-6 md:py-14" key={project.slug}>
               <Link href={`/projects/${project.slug}`} className="grid items-start gap-7 md:grid-cols-12 md:gap-8">
                 <span className="font-mono text-[11px] text-ash md:order-1 md:col-span-1">{project.index}</span>
                 <div className={`md:col-span-6 ${position % 2 === 0 ? 'md:order-2' : 'md:order-3'}`}>
@@ -46,7 +46,7 @@ export function ProjectList({ items, headingLevel = 'h2', variant = 'archive' }:
         );
 
         return (
-          <article className={`group border-t border-line transition-colors ${variant === 'featured' ? 'py-10 md:py-14' : 'py-8 md:py-10'} ${project.caseStudy ? 'hover:bg-wash/60' : ''}`} key={project.slug}>
+          <article className={`group border-t border-line px-4 transition-colors md:px-6 ${variant === 'featured' ? 'py-10 md:py-14' : 'py-8 md:py-10'} ${project.caseStudy ? 'hover:bg-wash/60' : ''}`} key={project.slug}>
             {project.caseStudy ? (
               <Link href={`/projects/${project.slug}`} className="grid gap-5 md:grid-cols-12 md:gap-8">{content}</Link>
             ) : (

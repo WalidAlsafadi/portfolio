@@ -4,7 +4,7 @@ import { SocialLinks } from './social-links';
 
 export function Contact() {
   return (
-    <section className="border-t border-line py-20 md:py-28" id="contact">
+    <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="contact">
       <Container>
         <p className="eyebrow">Connect</p>
         <h2 className="mt-5 max-w-3xl font-serif text-display font-medium leading-tight text-balance">Research, engineering, or collaboration.</h2>
