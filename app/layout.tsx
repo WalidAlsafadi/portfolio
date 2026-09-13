@@ -24,10 +24,10 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1, them
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${newsreader.variable} ${mono.variable}`}>
-      <body className="min-h-screen antialiased">
+      <body className="flex min-h-screen min-h-[100dvh] flex-col antialiased">
         <a href="#main-content" className="fixed left-4 top-4 z-[100] -translate-y-24 bg-ink px-4 py-2 text-sm text-paper focus:translate-y-0">Skip to content</a>
         <Header />
-        <main id="main-content">{children}</main>
+        <main className="flex flex-1 flex-col" id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

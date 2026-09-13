@@ -3,6 +3,18 @@ export type ExternalLink = {
   href: string;
 };
 
+export type ProjectImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+export type ProjectVisual = ProjectImage & {
+  section?: string;
+  caption?: string;
+};
+
 export type ProjectSection = {
   title: string;
   paragraphs: string[];
@@ -21,14 +33,12 @@ export type Project = {
   stack: string[];
   featured: boolean;
   caseStudy: boolean;
-  visual?: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-  };
+  cardImage?: ProjectImage;
+  demoUrl?: string;
+  sourceUrl?: string;
+  secondaryLinks?: ExternalLink[];
+  visuals?: ProjectVisual[];
   sections: ProjectSection[];
-  links: ExternalLink[];
   relatedResearch: string[];
   lastModified: string;
 };

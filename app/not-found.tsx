@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <Container className="flex min-h-[65vh] flex-col justify-center py-20">
+    <Container className="flex flex-1 flex-col justify-center py-16 md:py-20">
       <p className="eyebrow">404 · Page not found</p>
       <h1 className="mt-6 max-w-3xl font-serif text-display font-medium">This page does not exist.</h1>
       <p className="mt-5 max-w-lg leading-7 text-graphite">The address may have changed, or the page may not have been published.</p>

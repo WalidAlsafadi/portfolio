@@ -15,7 +15,6 @@ import { experience } from '@/data/experience';
 import { profile } from '@/data/profile';
 import { projects } from '@/data/projects';
 import { publications } from '@/data/publications';
-import { areasOfWork } from '@/data/research';
 import { homepageSchema } from '@/lib/structured-data';
 
 export default function HomePage() {
@@ -38,35 +37,27 @@ export default function HomePage() {
             <div className="relative mx-auto w-full max-w-sm lg:col-span-5 lg:ml-auto lg:mr-0">
               <span className="absolute -left-3 -top-3 h-10 w-10 border-l border-t border-line" aria-hidden="true" />
               <span className="absolute -bottom-3 -right-3 h-10 w-10 border-b border-r border-line" aria-hidden="true" />
-              <Image className="aspect-[4/5] w-full object-cover grayscale contrast-[1.04]" src={profile.image} alt="Walid Alsafadi" width={768} height={960} priority sizes="(min-width: 1024px) 384px, 100vw" />
+              <Image className="aspect-[4/5] w-full object-cover" src={profile.image} alt="Walid Alsafadi" width={768} height={960} priority sizes="(min-width: 1024px) 384px, 100vw" />
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-line py-16 md:py-20" id="about">
+      <section className="border-t border-line py-20 md:py-28" id="about">
         <Container>
-          <div className="grid gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-3"><p className="eyebrow">About</p></div>
-            <div className="lg:col-span-9">
-              <h2 className="max-w-4xl font-serif text-3xl font-medium leading-tight md:text-4xl">Research rigor, engineering practice, and technical education.</h2>
-              <p className="mt-6 max-w-3xl text-base leading-8 text-graphite">{profile.bio}</p>
-              <div className="mt-10 border-t border-line pt-7">
-                <p className="eyebrow">Areas of focus</p>
-                <ul className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                  {areasOfWork.map((area) => (
-                    <li className="bg-wash px-4 py-3 text-sm font-medium text-graphite" key={area}>{area}</li>
-                  ))}
-                </ul>
-              </div>
+          <SectionHeading number="01" title="About" />
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+            <h2 className="max-w-4xl font-serif text-3xl font-medium leading-tight md:text-4xl lg:col-span-5">Research rigor, engineering practice, and technical education.</h2>
+            <div className="lg:col-span-7">
+              <p className="max-w-3xl text-base leading-8 text-graphite">{profile.bio}</p>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="experience">
+      <section className="border-t border-line py-20 md:py-28" id="experience">
         <Container>
-          <SectionHeading number="01" title="Experience" />
+          <SectionHeading number="02" title="Experience" />
           <div className="border-b border-line">
             {experience.filter((item) => item.showOnHomepage).map((item) => (
               <article className="grid gap-4 border-t border-line px-4 py-7 transition-colors hover:bg-wash/60 md:grid-cols-12 md:gap-8 md:px-6" key={`${item.role}-${item.organization}`}>
@@ -91,24 +82,24 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="research-publication">
+      <section className="border-t border-line py-20 md:py-28" id="research-publication">
         <Container>
-          <SectionHeading number="02" title="Research & Publication" />
+          <SectionHeading number="03" title="Research & Publication" />
           <div className="border-b border-line"><PublicationEntry publication={publications[0]} headingLevel="h3" /></div>
         </Container>
       </section>
 
-      <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="selected-work">
+      <section className="border-t border-line py-20 md:py-28" id="selected-work">
         <Container>
-          <SectionHeading number="03" title="Projects" />
-          <ProjectList items={projects.filter((project) => project.featured)} headingLevel="h3" variant="featured" />
+          <SectionHeading number="04" title="Projects" />
+          <ProjectList items={projects.filter((project) => project.featured)} headingLevel="h3" />
           <div className="mt-9 flex justify-end"><ArrowLink href="/projects">View all projects</ArrowLink></div>
         </Container>
       </section>
 
-      <section className="scroll-mt-20 border-t border-line py-20 md:py-28" id="education">
+      <section className="border-t border-line py-20 md:py-28" id="education">
         <Container>
-          <SectionHeading number="04" title="Education" />
+          <SectionHeading number="05" title="Education" />
           <div className="border-b border-line">
             {education.filter((item) => item.showOnHomepage).map((item) => (
               <article className="grid gap-4 border-t border-line px-4 py-7 transition-colors hover:bg-wash/60 md:grid-cols-12 md:gap-8 md:px-6" key={item.degree}>
@@ -132,7 +123,7 @@ export default function HomePage() {
 
       <section className="border-t border-line py-20 md:py-28">
         <Container>
-          <SectionHeading number="05" title="Selected Training & Certifications" />
+          <SectionHeading number="06" title="Selected Training & Certifications" />
           <div className="border-b border-line">
             {credentials.map((credential) => (
               <article className="grid gap-3 border-t border-line py-6 md:grid-cols-12 md:items-baseline md:gap-8" key={credential.name}>

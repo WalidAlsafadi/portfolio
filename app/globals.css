@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  :root { color-scheme: light; }
+  :root { color-scheme: light; --header-height: 4rem; }
   * { border-color: #e8e6e2; }
-  html { scroll-behavior: smooth; text-rendering: optimizeLegibility; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); text-rendering: optimizeLegibility; }
   body { background: #faf9f7; color: #1a1a1a; font-family: var(--font-inter), system-ui, sans-serif; }
   h1, h2, h3 { text-wrap: balance; }
   p { text-wrap: pretty; }

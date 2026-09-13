@@ -10,8 +10,15 @@ export const socialLinks: ExternalLink[] = [
   { label: 'ORCID', href: 'https://orcid.org/0009-0006-9164-3395' },
 ];
 
+export const researchGateLink: ExternalLink = {
+  label: 'ResearchGate',
+  href: 'https://www.researchgate.net/profile/Walid-Alsafadi',
+};
+
+export const contactSocialLinks: ExternalLink[] = [...socialLinks, researchGateLink];
+
 export const sameAs = [
   ...socialLinks.map((link) => link.href),
-  'https://www.researchgate.net/profile/Walid-Alsafadi',
+  researchGateLink.href,
   'https://aclanthology.org/people/walid-alsafadi/',
 ];

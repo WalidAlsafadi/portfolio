@@ -5,14 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState, type MouseEvent } from 'react';
 import { Container } from './container';
 import { SectionLink } from '@/components/ui/section-link';
-
-const navigation = [
-  { label: 'Experience', sectionId: 'experience' },
-  { label: 'Research', sectionId: 'research-publication' },
-  { label: 'Work', sectionId: 'selected-work' },
-  { label: 'Education', sectionId: 'education' },
-  { label: 'Contact', sectionId: 'contact' },
-];
+import { homeNavigation } from '@/data/navigation';
 
 function NavigationLinks({
   activeSection,
@@ -27,7 +20,7 @@ function NavigationLinks({
 
   return (
     <ul className={mobile ? 'grid gap-4 py-6' : 'flex items-center gap-7'}>
-      {navigation.map((item) => (
+      {homeNavigation.map((item) => (
         <li key={item.sectionId}>
           <SectionLink
             aria-current={activeSection === item.sectionId ? 'location' : undefined}
@@ -47,12 +40,34 @@ export function Header() {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
+  const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (
+      pathname !== '/' ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${window.location.pathname}${window.location.search}`,
+    );
+  };
+
   useEffect(() => {
     if (pathname !== '/') {
       return;
     }
 
-    const sectionIds = navigation.map((item) => item.sectionId);
+    const sectionIds: readonly string[] = homeNavigation.map((item) => item.sectionId);
     let frame = 0;
 
     const updateActiveSection = () => {
@@ -110,10 +125,10 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur-sm">
-      <Container>
-        <nav aria-label="Primary navigation" className="flex min-h-16 items-center justify-between">
-          <Link href="/" className="font-serif text-xl font-semibold tracking-tight" aria-label="Walid Alsafadi, home">
+    <header className="sticky top-0 z-50 h-16 border-b border-line bg-paper/95 backdrop-blur-sm">
+      <Container className="h-full">
+        <nav aria-label="Primary navigation" className="flex h-full items-center justify-between">
+          <Link href="/" onClick={handleLogoClick} className="font-serif text-xl font-semibold tracking-tight" aria-label="Walid Alsafadi, home">
             WA<span className="text-ash">.</span>
           </Link>
           <div className="hidden md:block">

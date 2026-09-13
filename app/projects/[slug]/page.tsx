@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/layout/container';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
@@ -6,12 +7,40 @@ import { ArrowLink } from '@/components/ui/arrow-link';
 import { JsonLd } from '@/components/ui/json-ld';
 import { caseStudyProjects, getProject } from '@/data/projects';
 import { profile } from '@/data/profile';
+import type { ProjectVisual } from '@/data/types';
 import { createMetadata } from '@/lib/metadata';
 import { absoluteUrl } from '@/lib/utils';
 import { breadcrumbSchema } from '@/lib/structured-data';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return caseStudyProjects.map((project) => ({ slug: project.slug })); }
+
+function CaseStudyVisual({
+  visual,
+  opening = false,
+}: {
+  visual: ProjectVisual;
+  opening?: boolean;
+}) {
+  return (
+    <figure className={`overflow-hidden rounded-[4px] border border-line bg-wash ${opening ? 'mt-12' : 'mt-9'}`}>
+      <Image
+        alt={visual.alt}
+        className="h-auto w-full"
+        height={visual.height}
+        loading="lazy"
+        sizes={opening ? '(min-width: 1280px) 1152px, calc(100vw - 48px)' : '(min-width: 1024px) 768px, calc(100vw - 48px)'}
+        src={visual.src}
+        width={visual.width}
+      />
+      {visual.caption ? (
+        <figcaption className="border-t border-line px-4 py-3 font-mono text-[10px] leading-5 tracking-[0.08em] text-ash">
+          {visual.caption}
+        </figcaption>
+      ) : null}
+    </figure>
+  );
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -24,6 +53,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
+  const openingVisual = project.visuals?.find((visual) => !visual.section);
 
   const crumbs = [{ name: 'Home', path: '/' }, { name: 'Projects', path: '/projects' }, { name: project.title, path: `/projects/${project.slug}` }];
   const projectSchema = {
@@ -49,6 +79,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-ash">{project.subtitle}</p>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-graphite">{project.description}</p>
             <ul className="mt-8 flex flex-wrap gap-2">{project.tags.slice(0, 3).map((tag) => <li className="border border-line px-3 py-1.5 text-xs text-graphite" key={tag}>{tag}</li>)}</ul>
+            {(project.demoUrl || project.sourceUrl || project.secondaryLinks?.length) ? (
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+                {project.demoUrl ? <ArrowLink external href={project.demoUrl}>Demo</ArrowLink> : null}
+                {project.sourceUrl ? <ArrowLink external href={project.sourceUrl}>GitHub</ArrowLink> : null}
+                {project.secondaryLinks?.map((link) => <ArrowLink external href={link.href} key={link.label}>{link.label}</ArrowLink>)}
+              </div>
+            ) : null}
+            {openingVisual ? <CaseStudyVisual opening visual={openingVisual} /> : null}
           </Container>
         </header>
         <Container className="py-14 md:py-20">
@@ -56,16 +94,20 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <aside className="lg:col-span-3">
               <p className="eyebrow">Technical context</p>
               <ul className="mt-5 grid gap-2 text-sm leading-6 text-graphite">{project.stack.map((item) => <li key={item}>{item}</li>)}</ul>
-              {project.links.length > 0 && <div className="mt-8 grid justify-start gap-3">{project.links.map((link) => <ArrowLink external href={link.href} key={link.label}>{link.label}</ArrowLink>)}</div>}
             </aside>
             <div className="prose-editorial lg:col-span-9">
-              {project.sections.map((section) => (
-                <section key={section.title}>
-                  <h2>{section.title}</h2>
-                  {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                  {section.items && <ul>{section.items.map((item) => <li key={item}>{item}</li>)}</ul>}
-                </section>
-              ))}
+              {project.sections.map((section) => {
+                const sectionVisuals = project.visuals?.filter((visual) => visual.section === section.title) ?? [];
+
+                return (
+                  <section key={section.title}>
+                    <h2>{section.title}</h2>
+                    {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                    {section.items && <ul>{section.items.map((item) => <li key={item}>{item}</li>)}</ul>}
+                    {sectionVisuals.map((visual) => <CaseStudyVisual key={visual.src} visual={visual} />)}
+                  </section>
+                );
+              })}
               <section>
                 <h2>Related research</h2>
                 <p>{project.relatedResearch.join(' · ')}</p>
