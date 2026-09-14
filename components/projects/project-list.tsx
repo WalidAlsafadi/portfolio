@@ -32,17 +32,17 @@ function ProjectCard({
   );
 
   return (
-    <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-[4px] border border-line bg-paper transition-colors hover:bg-wash/40">
-      {project.caseStudy ? (
-        <Link aria-label={`Read the ${project.title} case study`} href={`/projects/${project.slug}`}>
-          {media}
-        </Link>
-      ) : media}
+    <article className={`group relative flex h-full min-w-0 flex-col overflow-hidden rounded-[4px] border border-line bg-paper transition-colors hover:bg-wash/40 ${project.caseStudy ? 'cursor-pointer' : ''}`}>
+      {media}
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <p className="font-mono text-[10px] tracking-[0.14em] text-ash">{project.index}</p>
         <Heading className="mt-4 font-serif text-2xl font-medium tracking-tight">
           {project.caseStudy ? (
-            <Link className="transition-colors hover:text-graphite" href={`/projects/${project.slug}`}>
+            <Link
+              aria-label={`Read the ${project.title} case study`}
+              className="transition-colors after:absolute after:inset-0 after:z-10 hover:text-graphite group-hover:text-graphite"
+              href={`/projects/${project.slug}`}
+            >
               {project.title}
             </Link>
           ) : project.title}
@@ -58,17 +58,17 @@ function ProjectCard({
         </ul>
         <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-7">
           {project.caseStudy ? (
-            <Link className="arrow-link text-sm font-medium" href={`/projects/${project.slug}`}>
+            <span className="inline-flex items-center gap-[0.45rem] text-sm font-medium transition-[gap,color] duration-200 group-hover:gap-[0.7rem] group-hover:text-graphite">
               Case study <span aria-hidden="true">→</span>
-            </Link>
+            </span>
           ) : null}
           {project.demoUrl ? (
-            <a className="link-underline inline-flex items-baseline gap-1.5 text-sm font-medium" href={project.demoUrl} rel="noopener noreferrer" target="_blank">
+            <a className="link-underline relative z-20 inline-flex items-baseline gap-1.5 text-sm font-medium" href={project.demoUrl} rel="noopener noreferrer" target="_blank">
               Demo <span aria-hidden="true">↗</span>
             </a>
           ) : null}
           {!project.caseStudy && project.sourceUrl ? (
-            <a className="link-underline inline-flex items-baseline gap-1.5 text-sm font-medium" href={project.sourceUrl} rel="noopener noreferrer" target="_blank">
+            <a className="link-underline relative z-20 inline-flex items-baseline gap-1.5 text-sm font-medium" href={project.sourceUrl} rel="noopener noreferrer" target="_blank">
               Source <span aria-hidden="true">↗</span>
             </a>
           ) : null}

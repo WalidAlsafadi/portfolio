@@ -14,8 +14,8 @@ export default function ProjectsPage() {
       <PageIntro
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Projects' }]}
         eyebrow="Work"
-        title="Selected AI systems and applied research projects"
-        description="A focused archive spanning multi-agent evaluation, Arabic news verification, learning analytics, multimodal retrieval, and data systems."
+        title="Selected AI, data, and software projects"
+        description="A focused archive spanning multi-agent evaluation, Arabic news verification, learning analytics, multimodal document exploration, and healthcare data systems."
       />
       <Container className="py-16 md:py-24">
         <ProjectList items={projects} />

@@ -31,6 +31,8 @@ export type Project = {
   description: string;
   tags: string[];
   stack: string[];
+  contribution: string;
+  projectMode: 'team' | 'independent';
   featured: boolean;
   caseStudy: boolean;
   cardImage?: ProjectImage;

@@ -56,6 +56,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const openingVisual = project.visuals?.find((visual) => !visual.section);
 
   const crumbs = [{ name: 'Home', path: '/' }, { name: 'Projects', path: '/projects' }, { name: project.title, path: `/projects/${project.slug}` }];
+  const authorship = project.projectMode === 'team'
+    ? { contributor: { '@id': `${profile.siteUrl}/#person` } }
+    : { creator: { '@id': `${profile.siteUrl}/#person` } };
   const projectSchema = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
@@ -63,7 +66,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     alternateName: project.subtitle,
     description: project.summary,
     url: absoluteUrl(`/projects/${project.slug}`),
-    creator: { '@id': `${profile.siteUrl}/#person` },
+    ...authorship,
     keywords: project.tags.join(', '),
   };
 
@@ -81,9 +84,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <ul className="mt-8 flex flex-wrap gap-2">{project.tags.slice(0, 3).map((tag) => <li className="border border-line px-3 py-1.5 text-xs text-graphite" key={tag}>{tag}</li>)}</ul>
             {(project.demoUrl || project.sourceUrl || project.secondaryLinks?.length) ? (
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-                {project.demoUrl ? <ArrowLink external href={project.demoUrl}>Demo</ArrowLink> : null}
-                {project.sourceUrl ? <ArrowLink external href={project.sourceUrl}>GitHub</ArrowLink> : null}
-                {project.secondaryLinks?.map((link) => <ArrowLink external href={link.href} key={link.label}>{link.label}</ArrowLink>)}
+                {project.demoUrl ? (
+                  <a className="link-underline inline-flex items-baseline gap-1.5 text-sm font-medium text-ink" href={project.demoUrl} rel="noopener noreferrer" target="_blank">
+                    Demo <span aria-hidden="true">↗</span>
+                  </a>
+                ) : null}
+                {project.sourceUrl ? (
+                  <a className="link-underline inline-flex items-baseline gap-1.5 text-sm font-medium text-ink" href={project.sourceUrl} rel="noopener noreferrer" target="_blank">
+                    GitHub <span aria-hidden="true">↗</span>
+                  </a>
+                ) : null}
+                {project.secondaryLinks?.map((link) => (
+                  <a className="link-underline inline-flex items-baseline gap-1.5 text-sm font-medium text-ink" href={link.href} key={link.label} rel="noopener noreferrer" target="_blank">
+                    {link.label} <span aria-hidden="true">↗</span>
+                  </a>
+                ))}
               </div>
             ) : null}
             {openingVisual ? <CaseStudyVisual opening visual={openingVisual} /> : null}
@@ -92,10 +107,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <Container className="py-14 md:py-20">
           <div className="grid gap-12 lg:grid-cols-12">
             <aside className="lg:col-span-3">
-              <p className="eyebrow">Technical context</p>
-              <ul className="mt-5 grid gap-2 text-sm leading-6 text-graphite">{project.stack.map((item) => <li key={item}>{item}</li>)}</ul>
+              <p className="eyebrow">Project context</p>
+              <div className="mt-5 divide-y divide-line border-y border-line">
+                <div className="py-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ash">Contribution</p>
+                  <p className="mt-2 text-sm font-medium leading-6 text-ink">{project.contribution}</p>
+                </div>
+                {project.stack.map((item) => <p className="py-3 text-sm leading-6 text-graphite" key={item}>{item}</p>)}
+              </div>
             </aside>
-            <div className="prose-editorial lg:col-span-9">
+            <div className="prose-editorial lg:col-span-9 [&>section:first-child>h2]:mt-0 [&>section:first-child>h2]:border-t-0 [&>section:first-child>h2]:pt-0">
               {project.sections.map((section) => {
                 const sectionVisuals = project.visuals?.filter((visual) => visual.section === section.title) ?? [];
 
@@ -109,9 +130,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 );
               })}
               <section>
-                <h2>Related research</h2>
+                <h2>Related areas</h2>
                 <p>{project.relatedResearch.join(' · ')}</p>
-                <div className="mt-6 flex flex-wrap gap-5"><ArrowLink href="/#research-publication">Research & Publication</ArrowLink><ArrowLink href="/projects">All projects</ArrowLink></div>
+                <div className="mt-6"><ArrowLink href="/projects">All projects</ArrowLink></div>
               </section>
             </div>
           </div>
