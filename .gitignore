@@ -49,6 +49,9 @@ Thumbs.db
 
 # Local planning, audit, and CV source documents
 /docs/
+!/docs/
+/docs/*
+!/docs/seo-post-launch.md
 /content/
 /walid-alsafadi-*.md
 /public/cv.pdf

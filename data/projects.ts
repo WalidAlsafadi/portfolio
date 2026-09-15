@@ -65,7 +65,7 @@ export const projects: Project[] = [
       },
     ],
     relatedResearch: ['Multi-Agent Systems', 'AI Evaluation', 'Decision Support'],
-    lastModified: '2026-09-14',
+    lastModified: '2026-09-15',
   },
   {
     slug: 'haqiqa',
@@ -132,7 +132,7 @@ export const projects: Project[] = [
       },
     ],
     relatedResearch: ['Arabic NLP', 'AI Evaluation', 'Intelligent Systems'],
-    lastModified: '2026-09-14',
+    lastModified: '2026-09-15',
   },
   {
     slug: 'dialysis-unit-records',
@@ -232,7 +232,7 @@ export const projects: Project[] = [
       },
     ],
     relatedResearch: ['Healthcare Workflow', 'Data Systems', 'Operational Analytics'],
-    lastModified: '2026-09-14',
+    lastModified: '2026-09-15',
   },
   {
     slug: 'skillmap-ai',
@@ -307,7 +307,7 @@ export const projects: Project[] = [
       },
     ],
     relatedResearch: ['Machine Learning', 'Learning Analytics', 'AI Evaluation'],
-    lastModified: '2026-09-14',
+    lastModified: '2026-09-15',
   },
   {
     slug: 'insightlens',
@@ -343,7 +343,7 @@ export const projects: Project[] = [
       },
     ],
     relatedResearch: ['Multimodal AI', 'Retrieval-Augmented Generation', 'Semantic Retrieval'],
-    lastModified: '2026-09-14',
+    lastModified: '2026-09-15',
   },
 ];
 

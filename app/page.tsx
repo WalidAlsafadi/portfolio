@@ -37,7 +37,7 @@ export default function HomePage() {
             <div className="relative mx-auto w-full max-w-sm lg:col-span-5 lg:ml-auto lg:mr-0">
               <span className="absolute -left-3 -top-3 h-10 w-10 border-l border-t border-line" aria-hidden="true" />
               <span className="absolute -bottom-3 -right-3 h-10 w-10 border-b border-r border-line" aria-hidden="true" />
-              <Image className="aspect-[4/5] w-full object-cover" src={profile.image} alt="Walid Alsafadi" width={768} height={960} priority sizes="(min-width: 1024px) 384px, 100vw" />
+              <Image className="aspect-[4/5] w-full object-cover" src={profile.image} alt="Walid Alsafadi" width={768} height={960} priority sizes="(min-width: 432px) 384px, calc(100vw - 48px)" />
             </div>
           </div>
         </Container>

@@ -5,7 +5,7 @@ import { caseStudyProjects } from '@/data/projects';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date('2026-09-14');
+  const lastModified = new Date('2026-09-15');
   const pages = ['', '/experience', '/projects'];
 
   return [

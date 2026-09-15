@@ -29,7 +29,9 @@ function CaseStudyVisual({
         className="h-auto w-full"
         height={visual.height}
         loading="lazy"
-        sizes={opening ? '(min-width: 1280px) 1152px, calc(100vw - 48px)' : '(min-width: 1024px) 768px, calc(100vw - 48px)'}
+        sizes={opening
+          ? '(min-width: 1280px) 1152px, (min-width: 768px) calc(100vw - 80px), calc(100vw - 48px)'
+          : '(min-width: 1280px) 852px, (min-width: 1024px) calc(75vw - 108px), (min-width: 768px) calc(100vw - 80px), calc(100vw - 48px)'}
         src={visual.src}
         width={visual.width}
       />

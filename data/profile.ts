@@ -4,7 +4,7 @@ export const profile = {
   lastName: 'Alsafadi',
   siteUrl: 'https://walidalsafadi.com',
   seoTitle: 'Walid Alsafadi | AI, Data Science & Research',
-  metaDescription: 'Walid Alsafadi is an AI and data science professional working across machine learning, NLP, LLM systems, multi-agent systems, AI evaluation, and applied research.',
+  metaDescription: 'Walid Alsafadi is an AI engineer, data scientist, and researcher working across machine learning, NLP, LLM systems, multi-agent systems, and applied AI.',
   heroDescriptor: 'AI Engineer · Data Scientist · Researcher',
   compactDescriptor: 'AI & Data Scientist',
   currentRole: 'Teaching Assistant',

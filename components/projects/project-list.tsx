@@ -18,7 +18,7 @@ function ProjectCard({
         className="h-full w-full object-cover object-top"
         height={project.cardImage.height}
         loading="lazy"
-        sizes="(min-width: 1024px) 31vw, (min-width: 768px) 47vw, 100vw"
+        sizes="(min-width: 1280px) 368px, (min-width: 1024px) calc((100vw - 176px) / 3), (min-width: 768px) calc((100vw - 104px) / 2), calc(100vw - 48px)"
         src={project.cardImage.src}
         width={project.cardImage.width}
       />
