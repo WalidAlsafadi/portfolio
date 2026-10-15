@@ -14,13 +14,13 @@ export type Education = {
 
 export const education: Education[] = [
   {
-    degree: "Master of Science in Computer Engineering",
+    degree: "Master of Science in Information Technology",
     institution: "Islamic University of Gaza",
     location: "Gaza Strip, Palestine",
     period: "Sep 2026 - Present",
     logo: organizations.iug.logo,
     logoAlt: organizations.iug.logoAlt,
-    showOnHomepage: false,
+    showOnHomepage: true,
   },
   {
     degree: "Bachelor of Science in Data Science and Artificial Intelligence",
